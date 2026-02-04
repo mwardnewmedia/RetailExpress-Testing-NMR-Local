@@ -1,0 +1,11 @@
+.department-brands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.department-brands img {
+    width: 80px;
+    margin:0 2rem;
+}

@@ -1,0 +1,23 @@
+.department-card__info {
+    position: absolute;
+    background: rgba(0,0,0,.6);
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    padding:2rem;
+}
+
+.department-card__info h3 {
+    color:#FFF!important;
+}
+
+.department-card {
+    position: relative;
+}
+
+.department-card__image-wrapper {
+    padding-top: 0!important;
+    margin-left: 0!important;
+    margin-right: 0!important;
+}

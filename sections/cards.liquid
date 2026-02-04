@@ -1,0 +1,126 @@
+<div class="departments-section py-10">
+  <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-left">{{ section.settings.title }}</h2>
+  </div>
+
+  {% assign block_count = 0 %}
+  {% assign grid_cols_class = 'grid-cols-2' %}
+  {% for block in section.blocks %}
+    {% assign block_count = block_count | plus: 1 %}
+  {% endfor %}
+
+  {% comment %}
+    Grid will display 2 across by default. If number of blocks is divisible by 3, we're creating a 3 across grid as the first priority.
+    If the number of blocks is divisible by 4, we're making a 4 across grid as a second priority (larger screens)
+    Added: If greater than 10, just make 4 across
+  {% endcomment %}
+
+  {% if block_count == 3 or block_count == 6 or block_count == 9 or block_count == 12 %}
+    {% assign grid_cols_class = 'grid-cols-3' %}
+  {% elsif block_count == 4 or block_count == 8 or block_count > 10 %}
+    {% assign grid_cols_class = 'grid-cols-4' %}
+  {% endif %}
+
+  <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
+    <ul class="mx-auto mt-10 grid grid-cols-2 gap-x-8 gap-y-16 sm:{{ grid_cols_class }}">
+      {% for block in section.blocks %}
+        <li class="relative h-48 md:h-96">
+          <img
+            src="{{ block.settings.image | image_url: width: 500 }}"
+            loading="lazy"
+            class="w-full h-full object-cover object-center rounded-lg"
+            alt="{{ block.settings.image.alt }}"
+          >
+          <div class="absolute bg-black bg-opacity-50 w-full bottom-0 py-3 rounded-b-lg">
+            <h3 class="text-center text-white">{{ block.settings.title }}</h3>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="section-button">
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold p-4 rounded inline-block mt-8"
+          {% if section.settings.button_link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+        >
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cards",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Multicolumn",
+      "label": "Cards Heading"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Button label",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "t:sections.multicolumn.blocks.column.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "default": "Column",
+          "label": "Card Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Card Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cards",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

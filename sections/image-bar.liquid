@@ -1,0 +1,177 @@
+<div class="bg-white py-16">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+
+    <div class="image-bar grid grid-cols-4 space-x-3">
+    
+      {% for block in section.blocks %}
+        <div class="image-bar-block relative">
+          {% if block.settings.link != blank %}
+            <a class="image-bar__link" href="{{ block.settings.link }}">
+              <div class="image-bar__item h-56 bg-red-500 color-accent-1"
+                   data-bgset="{% include 'bgset', image: block.settings.image %}"
+                   data-sizes="auto"
+                   data-parent-fit="cover"
+                   style="background-position: {{ block.settings.alignment }};"
+                   data-image-loading-animation>
+          {% elsif block.settings.image != blank %}
+            <div class="image-bar__item image-bar__item--{{ block.id }} h-56"
+                 data-bgset="{% include 'bgset', image: block.settings.image %}"
+                 data-sizes="auto"
+                 data-parent-fit="cover"
+                 style="background-position: {{ block.settings.alignment }};"
+                 data-image-loading-animation>
+          {% else %}
+            <div class="image-bar__item h-56 bg-red-500 color-accent-1">
+          {% endif %}
+          <div class="image-bar__content{% if block.settings.cta_label != blank or block.settings.link != blank %} image-bar__overlay{% endif %}">
+    
+            {% if block.settings.cta_label != blank %}
+              <div class="image-bar__text absolute text-center w-full h-full" style="top:0;bottom:0;">
+                <h3 class="image-bar__caption flex items-center justify-center w-full h-full" style="color:#FFF!important">{{ block.settings.cta_label | escape }}</h3>
+              </div>
+            {% endif %}
+          </div>
+          {% if block.settings.link != blank %}
+            </div></a>
+          {% else %}
+            </div>
+          {% endif %}
+        </div>
+        <noscript>
+          <div class="grid__item {{ column_size }}" {{ block.shopify_attributes }}>
+            <div class="image-bar__item image-bar__item--{{ block.id }}" style="background-image: url({{ block.settings.image | img_url: '2048x' }});"></div>
+          </div>
+        </noscript>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+          
+
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Image Bar"
+  },
+  "class": "index-section index-section--flush",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": {
+        "en": "Section height"
+      },
+      "default": "medium",
+      "options": [
+        {
+          "label": {
+            "en": "Extra Small"
+          },
+          "value": "x-small"
+        },
+        {
+          "label": {
+            "en": "Small"
+          },
+          "value": "small"
+        },
+        {
+          "label": {
+            "en": "Medium"
+          },
+          "value": "medium"
+        },
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": {
+        "en": "Image"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "en": "Image"
+          }
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": {
+            "en": "Image alignment"
+          },
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": {
+                "en": "Top"
+              }
+            },
+            {
+              "value": "center",
+              "label": {
+                "en": "Middle"
+              }
+            },
+            {
+              "value": "bottom",
+              "label": {
+                "en": "Bottom"
+              }
+            }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": {
+            "en": "Link"
+          },
+          "info": {
+            "en": "Optional"
+          }
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": {
+            "en": "Caption"
+          }
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Image Bar"
+      },
+      "category": {
+        "en": "Image"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

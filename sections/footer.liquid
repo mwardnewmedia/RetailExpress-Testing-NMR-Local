@@ -1,0 +1,120 @@
+<footer class="bg-white">
+  <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+    <nav class="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12" aria-label="Footer">
+      {% assign menu = linklists.menu %}
+      {% for link in linklists[section.settings.menu].links %}
+        <div class="pb-6">
+          <a href="{{ link.url }}" class="text-sm leading-6 text-gray-600 hover:text-gray-900" title="{{ link.title }}">
+            {{- link.title -}}
+          </a>
+        </div>
+      {% endfor %}
+    </nav>
+    <div class="mt-10 flex justify-center space-x-10">
+      <ul class="flex space-x-2 mr-3">
+        {% if settings.social_facebook_link != blank %}
+            <li>
+              <a
+                class="inline-block py-3"
+                target="_blank"
+                href="{{ settings.social_facebook_link }}"
+                title="Facebook Link"
+              >
+                <i class="fa-lg themed-highlight fab fa-facebook-square" aria-hidden="true"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_instagram_link != blank %}
+            <li>
+              <a
+                class="inline-block py-3"
+                target="_blank"
+                href="{{ settings.social_instagram_link }}"
+                title="Intagram Link"
+              >
+                <i class="fa-lg themed-highlight fab fa-instagram" aria-hidden="true"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_youtube_link != blank %}
+            <li>
+              <a class="inline-block py-3" target="_blank" href="{{ settings.social_youtube_link }}" title="YouTube Link">
+                <i class="fa-lg themed-highlight fab fa-youtube" aria-hidden="true"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_tiktok_link != blank %}
+            <li>
+              <a class="inline-block py-3" target="_blank" href="{{ settings.social_tiktok_link }}" title="TikTok Link">
+                <i class="fal-lg themed-highlight fab fa-tiktok"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_twitter_link != blank %}
+            <li>
+              <a class="inline-block py-3" target="_blank" href="{{ settings.social_twitter_link }}" title="Twitter Link">
+                <i class="fal-lg themed-highlight fab fa-x-twitter"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_snapchat_link != blank %}
+            <li>
+              <a class="inline-block py-3" target="_blank" href="{{ settings.social_snapchat_link }}" title="Snapchat Link">
+                <i class="fal-lg themed-highlight fab fa-snapchat"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_pinterest_link != blank %}
+            <li>
+              <a class="inline-block py-3" target="_blank" href="{{ settings.social_pinterest_link }}" title="Pinterest Link">
+                <i class="fal-lg themed-highlight fab fa-pinterest"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_tumblr_link != blank %}
+            <li>
+              <a class="inline-block py-3" target="_blank" href="{{ settings.social_tumblr_link }}" title="Tumblr Link">
+                <i class="fal-lg themed-highlight fab fa-tumblr"></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if settings.social_vimeo_link != blank %}
+            <li>
+              <a class="inline-block py-3" target="_blank" href="{{ settings.social_vimeo_link }}" title="Vimeo Link">
+                <i class="fal-lg themed-highlight fab fa-vimeo"></i>
+              </a>
+            </li>
+          {% endif %}
+      </ul>
+    </div>
+    <p class="mt-10 text-center text-xs leading-5 text-gray-500">
+      &copy; {{ 'now' | date: '%Y' }}
+      {{ shop.name | link_to: routes.root_url }}, Inc. All rights reserved.
+    </p>
+    <p class="mt-10 text-center text-xs leading-5 text-gray-500">
+      <a target="_blank" href="https://newmediaretailer.com" title="New Media Retailer"
+        >Site Designed and Managed by New Media Retailer</a
+      >
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Nav Menu"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    }
+  ]
+}
+{% endschema %}

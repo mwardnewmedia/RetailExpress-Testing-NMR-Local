@@ -1,0 +1,98 @@
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' or template contains 'page' %}
+  <nav aria-label="Breadcrumb" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <ol role="list" class="flex items-center space-x-4">
+      <div class="flex items-center">
+        <a href="/" class="mr-4 text-sm font-medium text-gray-900" title="Home">Home</a>
+        <svg viewBox="0 0 6 20" aria-hidden="true" class="h-5 w-auto text-gray-300">
+          <path d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z" fill="currentColor" />
+        </svg>
+      </div>
+
+      {% if template contains 'page' %}
+        {% comment %}
+          Need to limit this to only pages that are not made with JSON templates.
+          <div class="flex items-center">
+              <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+                  {{ page.title }}
+              </a>
+          </div>
+        {% endcomment %}
+      {% elsif template contains 'product' %}
+        {% if collection.url %}
+          <div class="flex items-center">
+            <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+              {{ collection.title | link_to: collection.url }}
+            </a>
+          </div>
+        {% endif %}
+
+        <div class="flex items-center">
+          <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+            {{ product.title }}
+          </a>
+        </div>
+
+      {% elsif template contains 'collection' and collection.handle %}
+        {% if current_tags %}
+          {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+
+          <div class="flex items-center">
+            <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+              {{ collection.title | link_to: url }}
+            </a>
+          </div>
+
+          <span>{{ current_tags | join: ' + ' }}</span>
+
+        {% else %}
+          <div class="flex items-center">
+            <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+              {{ collection.title }}
+            </a>
+          </div>
+        {% endif %}
+
+      {% elsif template == 'blog' %}
+        {% if current_tags %}
+          <div class="flex items-center">
+            <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+              {{ blog.title | link_to: blog.url }}
+            </a>
+          </div>
+
+          <span>{{ current_tags | join: ' + ' }}</span>
+
+        {% else %}
+          <div class="flex items-center">
+            <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+              {{ blog.title }}
+            </a>
+          </div>
+        {% endif %}
+
+      {% elsif template == 'article' %}
+        <div class="flex items-center">
+          <a href="{{ blog.url }}" class="mr-4 text-sm font-medium text-gray-900">
+            {{ blog.title }}
+          </a>
+          <svg viewBox="0 0 6 20" aria-hidden="true" class="h-5 w-auto text-gray-300">
+            <path d="M4.878 4.34H3.551L.27 16.532h1.327l3.281-12.19z" fill="currentColor" />
+          </svg>
+        </div>
+
+        <div class="flex items-center">
+          <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+            {{ article.title }}
+          </a>
+        </div>
+
+      {% else %}
+        <div class="flex items-center">
+          <a href="#" class="mr-4 text-sm font-medium text-gray-900">
+            {{ page_title }}
+          </a>
+        </div>
+      {% endif %}
+    </ol>
+  </nav>
+{% endunless %}

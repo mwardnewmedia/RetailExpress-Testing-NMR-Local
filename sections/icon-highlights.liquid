@@ -1,0 +1,150 @@
+{%- comment -%}
+***************************************************************
+PLEASE NOTE: Do not change this file! 
+This theme is managed by the Replica app. 
+Any manual changes may be automatically overwritten at any time.
+3rd PARTY APP DEVELOPERS BEWARE WITH INSTALLS!
+Modify at your own peril, a broken website is the likely result.
+***************************************************************
+{%- endcomment -%}
+
+{% assign block = section.blocks[0] %}
+{% assign block_2 = section.blocks[1] %}
+{% assign block_3 = section.blocks[2] %}
+{% assign block_4 = section.blocks[3] %}
+{% assign block_5 = section.blocks[4] %}
+{% assign block_6 = section.blocks[5] %}
+{% assign blockCount =  section.blocks | size %}
+
+
+<div data-section-id="{{ section.id }}" data-section-type="featured-images-section">
+<div class="bg-white py-16">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    {% if section.settings.highlights_title != blank %}
+    <div class="section-header">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        {{  section.settings.highlights_title }}
+    </h2>
+    </div>
+    {% endif %}
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 text-center">
+    {% for block in section.blocks %}
+    	<div>
+            {% if block.settings.icon_link != blank %}
+              <a href="{{ block.settings.icon_link }}" title="{{ block.settings.icon_title }}" {% if block.settings.new_window == true %}target="_blank"{% endif %}>
+            {% endif %}
+            <div {% if section.settings.round_icons == true %}class="highlight-round mt-8"{% endif %} class="highlight-square"> 
+              <i class="fa-solid fa-{{ block.settings.icon_code }} text-8xl p-8 rounded-xl" style="color:{{ section.settings.icon_color }};background:{{ section.settings.icon_background_color }};border-color:{{ section.settings.icon_border_color }}"></i>
+              <h4 class="mt-4 text-xl" style="color:{{ section.settings.color }};">{{ block.settings.icon_title }}</h4>
+              {% if block.settings.icon_description %}
+              <p style="color:{{ section.settings.color }};">{{ block.settings.icon_description }}</p>
+              {% endif %}
+        	</div>
+            {% if block.settings.icon_link != blank %}
+              </a>
+            {% endif %}
+       	</div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Icon Highlights",
+	 "settings": [
+    {
+      "id": "highlights_title",
+      "type": "text",
+      "label": "Highlights label"
+    },  
+    {
+      "id": "round_icons",
+      "type": "checkbox",
+      "label": "Round Icons",
+      "default": true
+    },
+    {
+      "id": "color",
+      "type": "color",
+      "label": "Text color",
+      "default": "#4d4d4d"
+    },
+    {
+      "id": "icon_color",
+      "type": "color",
+      "label": "Icon color",
+      "default": "#4d4d4d"
+    },
+    {
+      "id": "icon_border_color",
+      "type": "color",
+      "label": "Icon border color",
+      "default": "#4d4d4d"
+    },
+    
+    {
+      "id": "icon_background_color",
+      "type": "color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    }
+  ],
+    "blocks": [
+    {
+      "type": "image",
+      "name": "Highlight",
+      "settings": [
+        {
+          "id": "icon_code",
+          "type": "text",
+          "label": "Font Awesome Code"
+        },       
+        {
+          "id": "icon_title",
+          "type": "text",
+          "label": "Icon Title"
+        },
+        {
+          "id": "icon_description",
+          "type": "text",
+          "label": "Icon Description"
+        },
+        {
+          "id": "icon_link",
+          "type": "url",
+          "label": "Icon Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "new_window",
+          "label": {
+            "en": "Open link in a new window"
+            },
+            "default": false
+        }
+      ],
+      "limit": 6
+    }
+  ],
+	"presets": [
+    {
+      "name": "Highlights",
+      "category": "Image",
+	  "blocks": [
+	  {
+        "type": "image"
+      },
+      {
+        "type": "image"
+      }
+	]
+    }
+  ]
+  }
+{% endschema %}

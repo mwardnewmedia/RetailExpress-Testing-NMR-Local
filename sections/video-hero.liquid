@@ -1,0 +1,115 @@
+<div class="video-hero-section -mt-20 z-0">
+  <div class="video-hero-wrapper relative">
+    {% if section.settings.youtube_id == blank and section.settings.vimeo_link == blank %}
+
+      <div class="shadow-overlay absolute bg-black/50 w-full h-full t-0 l-0 flex justify-center items-center flex-col"> 
+        <div class="video-hero-caption">
+          <h2 class="text-white text-center text-6xl font-bold tracking-tight text-gray-900">Video Hero</h2>
+          <p class="text-white text-center mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">Upload YouTube or Vimeo Link in Section Settings</p>
+          <div class="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center mx-auto mt-8">
+            <svg class="w-6 h-6 text-black" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="h-screen flex justify-center items-center">
+        <img src="https://mightysites.s3.amazonaws.com/resources/logo/mighty-logo.png" loading="lazy" alt="Mighty Sites Logo" class="h-96">
+      </div>  
+      
+    {% else %}
+
+      {% if section.settings.youtube_id != blank %}
+        <iframe id="youtube_hero" class="w-full h-screen" src="https://www.youtube.com/embed/{{ section.settings.youtube_id }}?rel=0&amp;autoplay=1&amp;controls=0&amp;loop=1&amp;mute=1&playlist={{ section.settings.youtube_id }};?modestbranding=1" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+      {% elsif section.settings.vimeo_link != blank %}   
+       <iframe id="vimeo_hero" src="{{ section.settings.vimeo_link }}" width="100%" style="height:100vh;border:none;margin-top:-16rem;"></iframe>
+      {% endif %}
+
+      {% if section.settings.video_hero_heading != blank %}
+        <div class="shadow-overlay absolute bg-black/50 w-full h-full t-0 l-0 flex justify-center items-center flex-col top-0"> 
+          <div class="video-hero-caption">
+            {% if section.settings.video_hero_heading %}
+              <h2 class="text-white text-center text-6xl font-bold tracking-tight text-gray-900">{{ section.settings.video_hero_heading }}</h2>
+            {% endif %}
+            {% if section.settings.video_hero_heading %}
+              <p class="text-white text-center mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">{{ section.settings.video_hero_subheading }}</p>
+            {% endif %}
+            {% if section.settings.button_text %}
+              <div class="section-button flex justify-center">
+                <a class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold p-4 rounded inline-block mt-8 mx-auto" href="{{ section.settings.button_link }}" title="{{ section.settings.button_text }}">
+                {{ section.settings.button_text }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+    {% endif %}  
+ </div>
+</div>
+
+
+{% schema %}
+{
+  "name": {
+    "en": "Video Hero"
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_hero_heading",
+      "label": {
+        "en": "Heading"
+      },
+      "default": {
+        "en": "Video Hero"
+      }
+    },
+    {
+      "type": "text",
+      "id": "video_hero_subheading",
+      "label": {
+        "en": "Subheading"
+      },
+      "default": {
+        "en": "Subheading"
+      }
+    },
+    {
+      "type": "text",
+      "id": "youtube_id",
+      "label": {
+        "en": "Youtube Video ID"
+      }
+    },
+    {
+      "type": "text",
+      "id": "vimeo_link",
+      "label": {
+        "en": "Vimeo Link"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Video Hero"
+      },
+      "category": {
+        "en": "Video"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+{% if section.settings.contact_bar %}
+  <div class="hidden md:flex flex-row justify-end justify-between themed-background themed-copy px-16 text-sm relative z-10 relative color-{{ section.settings.section_color_scheme }}">
+    <div class="flex flex-grow justify-between">
+      <div>
+        <span class="block py-3">
+          <a target="_blank" href="/apps/pages/locations">
+            <i class="fas fa-map-marker-alt fa-lg themed-highlight mr-1" aria-hidden="true"></i>
+            <span class="inline-block">{{ section.settings.location }}</span>
+          </a>
+        </span>
+      </div>
+
+      <ul class="flex space-x-2 mr-3">
+        {% if settings.social_facebook_link != blank %}
+          <li>
+            <a
+              class="inline-block py-3"
+              target="_blank"
+              href="{{ settings.social_facebook_link }}"
+              title="Facebook Link"
+            >
+              <i class="fa-lg themed-highlight fab fa-facebook-square" aria-hidden="true"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_instagram_link != blank %}
+          <li>
+            <a
+              class="inline-block py-3"
+              target="_blank"
+              href="{{ settings.social_instagram_link }}"
+              title="Intagram Link"
+            >
+              <i class="fa-lg themed-highlight fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_youtube_link != blank %}
+          <li>
+            <a class="inline-block py-3" target="_blank" href="{{ settings.social_youtube_link }}" title="YouTube Link">
+              <i class="fa-lg themed-highlight fab fa-youtube" aria-hidden="true"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_tiktok_link != blank %}
+          <li>
+            <a class="inline-block py-3" target="_blank" href="{{ settings.social_tiktok_link }}" title="TikTok Link">
+              <i class="fal-lg themed-highlight fab fa-tiktok"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_twitter_link != blank %}
+          <li>
+            <a class="inline-block py-3" target="_blank" href="{{ settings.social_twitter_link }}" title="Twitter Link">
+              <i class="fal-lg themed-highlight fab fa-x-twitter"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_snapchat_link != blank %}
+          <li>
+            <a class="inline-block py-3" target="_blank" href="{{ settings.social_snapchat_link }}" title="Snapchat Link">
+              <i class="fal-lg themed-highlight fab fa-snapchat"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_pinterest_link != blank %}
+          <li>
+            <a class="inline-block py-3" target="_blank" href="{{ settings.social_pinterest_link }}" title="Pinterest Link">
+              <i class="fal-lg themed-highlight fab fa-pinterest"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_tumblr_link != blank %}
+          <li>
+            <a class="inline-block py-3" target="_blank" href="{{ settings.social_tumblr_link }}" title="Tumblr Link">
+              <i class="fal-lg themed-highlight fab fa-tumblr"></i>
+            </a>
+          </li>
+        {% endif %}
+        {% if settings.social_vimeo_link != blank %}
+          <li>
+            <a class="inline-block py-3" target="_blank" href="{{ settings.social_vimeo_link }}" title="Vimeo Link">
+              <i class="fal-lg themed-highlight fab fa-vimeo"></i>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div>
+      <div class="flex flex-col md:flex-row justify-between lg:space-x-5">
+        <span class="block text-center md:text-left py-3">
+          <a href="mailto:{{ settings.email }}">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span>{{ settings.email }}</span>
+          </a>
+        </span>
+        <span class="block text-center md:text-left py-3">
+          <a href="tel:{{ settings.phone }}">
+            <i class="fas fa-phone-alt" aria-hidden="true"></i>
+            <span>{{ settings.phone }}</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Contact Bar",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "section_color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "contact_bar",
+      "default": true,
+      "label": "Show Contact Bar"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "default": "29 Lackawanna Ave Norwich, NY",
+      "label": "Address"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Bar"
+    }
+  ]
+}
+{% endschema %}

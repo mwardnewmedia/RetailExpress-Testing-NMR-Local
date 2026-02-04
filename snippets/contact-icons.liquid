@@ -1,0 +1,35 @@
+{% comment %}
+  Renders social icons.
+  Accepts:
+  - class: {String} a class to be added to the <ul> element (optional).
+
+  Usage:
+  {% render 'contact-icons',
+    class: 'my-class'
+  %}
+{% endcomment %}
+
+<ul class="list-unstyled list-contact{% if class %} {{ class}}{% endif %}" role="list">
+  <li id="location-icon" class="list-contact__item">
+      <a href="/apps/pages/locations" class="link list-contact__link">
+        {%- render 'icon-location' -%}
+        <span class="reveal-text-hover">Location</span>
+      </a>
+  </li>
+  {%- if section.settings.store_email != blank -%}
+    <li id="email-icon" class="list-contact__item">
+      <a href="mailto:{{ section.settings.store_email }}" class="link list-contact__link">
+        {%- render 'icon-email' -%}
+        <span class="reveal-text-hover">Email Us</span>
+      </a>
+    </li>
+  {%- endif -%}
+    {%- if section.settings.store_phone != blank -%}
+    <li id="phone-icon" class="list-contact__item">
+      <a href="tel:{{ section.settings.store_phone }}" class="link list-contact__link" data-hover-width="109">
+        {%- render 'icon-phone' -%}
+        <span class="text-display">{{ section.settings.store_phone }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+</ul>
