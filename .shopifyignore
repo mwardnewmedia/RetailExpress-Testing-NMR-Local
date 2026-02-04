@@ -1,0 +1,5 @@
+# Never deploy store-specific theme settings
+# config/settings_data.json
+
+# Ignore store locations set manually per customer
+# snippets/store-locations.liquid 
